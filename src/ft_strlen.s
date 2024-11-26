@@ -21,12 +21,6 @@ ft_strlen:
 	cmp		rax, 0					; if (s == 0)
 	je		.err					;   goto .err
 
-	.err:
-		call	ERRNO_LOC			; rax = __errno_location()
-		mov		dword [rax], EFAULT	; *rax = EFAULT
-		xor		rax, rax			; rax = 0
-		ret
-
 	.loop:
 		cmp		byte [rax], 0		; if (*(char *)rax == 0)
 		je		.end				;   goto .end
@@ -35,4 +29,10 @@ ft_strlen:
 
 	.end:
 		sub		rax, rdi			; rax -= rdi
+		ret
+
+	.err:
+		call	ERRNO_LOC			; rax = __errno_location()
+		mov		dword [rax], EFAULT	; *rax = EFAULT
+		xor		rax, rax			; rax = 0
 		ret

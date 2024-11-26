@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:26:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/26 13:27:32 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/26 17:02:10 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # endif
 
 extern size_t	ft_strlen(char *str);
+extern char		*ft_strcpy(char *dst, const char *src);
 
 #endif

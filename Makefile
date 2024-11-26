@@ -6,14 +6,16 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/26 16:32:08 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/26 17:03:02 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= nasm
 CFLAGS				= -f elf64 -g -I ./src
 NAME				= libasm.a
-SRC_FILES			= src/ft_strlen.s
+SRC_FILES			= \
+						src/ft_strlen.s \
+						src/ft_strcpy.s
 
 BUILD_FOLDER		= ./build
 

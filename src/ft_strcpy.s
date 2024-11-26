@@ -33,14 +33,9 @@ ft_strcpy:
 		jmp		.loop
 
 	.end:
-		mov		rcx, rax			; rcx = rax --> save the return value
-		call	ERRNO_LOC			; rax = __errno_location()
-		mov		dword [rax], 0		; *rax = 0
-		mov		rax, rcx			; rax = rcx --> get back the return value
+		errno11	0
 		ret							; return rax (original dst)
 
 	.err:
-		call	ERRNO_LOC			; rax = __errno_location()
-		mov		dword [rax], EFAULT	; *rax = EFAULT
-		xor		rax, rax			; rax = 0
+		errno	EFAULT, 0
 		ret

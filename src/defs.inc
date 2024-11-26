@@ -30,4 +30,17 @@ section .note.GNU-stack noexec
 %define EINVAL			22
 %define EFAULT			14
 
+%macro errno 2					; errno = %1, rax = %2
+	call	ERRNO_LOC			; rax = __errno_location()
+	mov		dword [rax], %1		; *rax = %1
+	mov		rax, %2				; rax = %2
+%endmacro
+
+%macro errno11 1				; errno = %1, using r11
+	mov		r11, rax			; r11 = rax --> save the return value
+	call	ERRNO_LOC			; rax = __errno_location()
+	mov		dword [rax], %1		; *rax = %1
+	mov		rax, r11			; rax = r11 --> get back the return value
+%endmacro
+
 extern __errno_location

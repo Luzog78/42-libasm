@@ -26,10 +26,10 @@ ft_strcpy:
 	.loop:
 		mov		cl, byte [rsi]	; cl (8 bits register) = *(char *)src
 		mov		byte [rdi], cl	; *(char *)dst = cl
+		cmp		cl, 0			; if (cl == 0)
+		je		.end			;   goto .end
 		inc		rsi				; src++
 		inc		rdi				; dst++
-		cmp		byte [rsi], 0	; if (*(char *)src == 0)
-		je		.end			;   goto .end
 		jmp		.loop
 
 	.end:

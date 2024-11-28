@@ -45,7 +45,7 @@ ft_strdup:
 		mov		rsp, rbp
 		pop		rbp
 		ret
-	
+
 	.no_mem:
 		errno	ENOMEM, 0
 		jmp		.end

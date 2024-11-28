@@ -1,7 +1,7 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_write.s                                         :+:      :+:    :+:    ;
+;    ft_read.s                                         :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
@@ -12,13 +12,13 @@
 
 %include "defs.inc"
 
-global	ft_write ; ssize_t	ft_write(int fd, const void *buf, size_t count);
+global	ft_read ; ssize_t	ft_read(int fd, const void *buf, size_t count);
 
 section	.text
 
-ft_write:
-	mov		rax, SYS_WRITE
-	syscall					; rax = write(...)
+ft_read:
+	mov		rax, SYS_READ
+	syscall					; rax = read(...)
 	cmp		rax, 0			; if (rax < 0)
 	jl		.err			;   goto .err
 	errno11	0				; errno = 0

@@ -6,12 +6,14 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/28 23:13:10 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/28 23:31:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include <errno.h>
 #include "libasm.h"
 
@@ -27,8 +29,8 @@
 	printf("Errno: %d\n\n", errno);
 
 void t_strlen() {
-	char *str;
-	size_t len;
+	char	*str;
+	size_t	len;
 
 	/* =============================== Test 1 =============================== */
 	str = "Hello World!";
@@ -63,8 +65,8 @@ void t_strlen() {
 	free(dst);
 
 void t_strcpy() {
-	char *src;
-	char *dst;
+	char	*src;
+	char	*dst;
 
 	/* =============================== Test 1 =============================== */
 	src = "Hello World!";
@@ -94,9 +96,9 @@ void t_strcpy() {
 	printf("Errno: %d\n\n", errno); \
 
 void t_strcmp() {
-	char *s1;
-	char *s2;
-	int ret;
+	char	*s1;
+	char	*s2;
+	int		ret;
 
 	/* =============================== Test 1 =============================== */
 	s1 = "Hello World!";
@@ -137,8 +139,8 @@ void t_strcmp() {
 	free(dup);
 
 void t_strdup() {
-	char *str;
-	char *dup;
+	char	*str;
+	char	*dup;
 
 	/* =============================== Test 1 =============================== */
 	str = "Hello World!";
@@ -163,57 +165,57 @@ void t_strdup() {
 
 
 #define T_WRITE \
-	ret = ft_write(fd, str, count); \
-	printf("\nString to write: \"%s\"\n", str); \
+	ret = ft_write(fd, buf, count); \
+	printf("\nString to write: \"%s\"\n", buf); \
 	printf("Bytes to write: %lu  |  on fd: %d\n", count, fd); \
 	printf("Bytes written: %ld\n", ret); \
 	printf("Errno: %d\n\n", errno);
 
 void t_write() {
 	int		fd;
-	char	*str;
+	char	*buf;
 	size_t	count;
 	ssize_t	ret;
 
 	/* =============================== Test 1 =============================== */
 	fd = 1;
-	str = "Hello World!";
-	count = ft_strlen(str);
+	buf = "Hello World!";
+	count = ft_strlen(buf);
 
 	T_WRITE
 
 	/* =============================== Test 2 =============================== */
 	fd = 2;
-	str = "Hello World!";
+	buf = "Hello World!";
 	count = 3;
 
 	T_WRITE
 
 	/* =============================== Test 3 =============================== */
 	fd = 1;
-	str = "Hello World!";
+	buf = "Hello World!";
 	count = 0;
 
 	T_WRITE
 
 	/* =============================== Test 4 =============================== */
 	fd = 1;
-	str = NULL;
+	buf = NULL;
 	count = 10;
 
 	T_WRITE
 
 	/* =============================== Test 5 =============================== */
 	fd = -42;
-	str = "Hello World!";
-	count = ft_strlen(str);
+	buf = "Hello World!";
+	count = ft_strlen(buf);
 
 	T_WRITE
 
 	/* =============================== Test 6 =============================== */
 	fd = 42;
-	str = "Hello World!";
-	count = ft_strlen(str);
+	buf = "Hello World!";
+	count = ft_strlen(buf);
 
 	T_WRITE
 }
@@ -224,7 +226,61 @@ void t_write() {
 /* ************************************************************************** */
 
 
-// #define T_READ
+#define T_READ \
+	printf("Bytes to read: %lu  |  on fd: %d\n", count, fd); \
+	ret = ft_read(fd, buf, count); \
+	printf("Read: \"%s\" (%ld)\n", buf, ret); \
+	printf("Errno: %d\n\n", errno); \
+	free(buf);
+
+void t_read() {
+	int		fd;
+	char	*buf;
+	size_t	count;
+	ssize_t	ret;
+
+	/* =============================== Test 1 =============================== */
+	fd = 0;
+	buf = calloc(1, 255);
+	count = 100;
+
+	T_READ
+
+	/* =============================== Test 1 =============================== */
+	fd = 0;
+	buf = calloc(1, 255);
+	count = 3;
+
+	T_READ
+
+	/* =============================== Test 1 =============================== */
+	fd = 0;
+	buf = calloc(1, 255);
+	count = 0;
+
+	T_READ
+
+	/* =============================== Test 1 =============================== */
+	fd = 0;
+	buf = NULL;
+	count = 3;
+
+	T_READ
+
+	/* =============================== Test 1 =============================== */
+	fd = -42;
+	buf = calloc(1, 255);
+	count = 255;
+
+	T_READ
+
+	/* =============================== Test 1 =============================== */
+	fd = 42;
+	buf = calloc(1, 255);
+	count = 255;
+
+	T_READ
+}
 
 
 /* ************************************************************************** */
@@ -244,5 +300,7 @@ int main() {
 	t_strdup();
 	DELIM
 	t_write();
+	DELIM
+	t_read();
 	return 0;
 }

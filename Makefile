@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/28 19:46:03 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/28 23:24:55 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC_FILES			= \
 						src/ft_strcpy.s \
 						src/ft_strcmp.s \
 						src/ft_strdup.s \
-						src/ft_write.s
+						src/ft_write.s \
+						src/ft_read.s
 
 BUILD_FOLDER		= ./build
 

@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/26 17:03:02 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/27 14:01:23 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CFLAGS				= -f elf64 -g -I ./src
 NAME				= libasm.a
 SRC_FILES			= \
 						src/ft_strlen.s \
-						src/ft_strcpy.s
+						src/ft_strcpy.s \
+						src/ft_strcmp.s
 
 BUILD_FOLDER		= ./build
 

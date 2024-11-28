@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/26 17:12:12 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:43:50 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include "libasm.h"
+
 
 void t_strlen() {
 	char *str;
@@ -80,9 +81,47 @@ void t_strcpy() {
 	free(dst);
 }
 
+void t_strcmp() {
+	char *s1;
+	char *s2;
+
+	/* =============================== Test 1 =============================== */
+	s1 = "Hello World!";
+	s2 = "Hello World!";
+
+	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
+	printf("Errno: %d\n\n", errno);
+
+	
+	/* =============================== Test 2 =============================== */
+	s1 = "abc";
+	s2 = "aaa";
+
+	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
+	printf("Errno: %d\n\n", errno);
+
+	
+	/* =============================== Test 3 =============================== */
+	s1 = "abc";
+	s2 = "abcdef";
+
+	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
+	printf("Errno: %d\n\n", errno);
+	
+	
+	/* =============================== Test 4 =============================== */
+	s1 = "Hello World!";
+	s2 = NULL;
+
+	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
+	printf("Errno: %d\n\n", errno);
+}
+
 int main() {
 	t_strlen();
 	printf("================================\n\n");
 	t_strcpy();
+	printf("================================\n\n");
+	t_strcmp();
 	return 0;
 }

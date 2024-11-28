@@ -31,6 +31,7 @@ section .note.GNU-stack noexec
 %define EINVAL			22
 %define EFAULT			14
 %define ENOMEM			12
+%define EBADF			9
 
 %macro errno 2					; errno = %1, rax = %2
 	call	ERRNO_LOC			; rax = __errno_location()

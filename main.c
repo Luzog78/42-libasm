@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/28 15:59:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/28 23:13:10 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,51 @@
 #include "libasm.h"
 
 
+/* ************************************************************************** */
+/*                                  ft_strlen                                 */
+/* ************************************************************************** */
+
+
+#define T_STRLEN \
+	len = ft_strlen(str); \
+	printf("Length of \"%s\" is %lu\n", str, len); \
+	printf("Errno: %d\n\n", errno);
+
 void t_strlen() {
 	char *str;
 	size_t len;
 
 	/* =============================== Test 1 =============================== */
 	str = "Hello World!";
-	len = ft_strlen(str);
-
-	printf("Length of \"%s\" is %lu\n", str, len);
-	printf("Errno: %d\n\n", errno);
+	
+	T_STRLEN
 
 
 	/* =============================== Test 2 =============================== */
 	str = "";
-	len = ft_strlen(str);
-
-	printf("Length of \"%s\" is %lu\n", str, len);
-	printf("Errno: %d\n\n", errno);
+	
+	T_STRLEN
 
 
 	/* =============================== Test 3 =============================== */
 	str = NULL;
-	len = ft_strlen(str);
-
-	printf("Length of \"%s\" is %lu\n", str, len);
-	printf("Errno: %d\n\n", errno);
+	
+	T_STRLEN
 }
+
+
+/* ************************************************************************** */
+/*                                  ft_strcpy                                 */
+/* ************************************************************************** */
+
+
+#define T_STRCPY \
+	dst = calloc(ft_strlen(src) + 1, 1); \
+	ft_strcpy(dst, src); \
+	printf("String to copy: \"%s\"\n", src); \
+	printf("Copied string: \"%s\"\n", dst); \
+	printf("Errno: %d\n\n", errno); \
+	free(dst);
 
 void t_strcpy() {
 	char *src;
@@ -50,72 +68,73 @@ void t_strcpy() {
 
 	/* =============================== Test 1 =============================== */
 	src = "Hello World!";
-	dst = calloc(ft_strlen(src) + 1, 1);
-	ft_strcpy(dst, src);
-
-	printf("String to copy: \"%s\"\n", src);
-	printf("Copied string: \"%s\"\n", dst);
-	printf("Errno: %d\n\n", errno);
-	free(dst);
-
+	
+	T_STRCPY
 	
 	/* =============================== Test 2 =============================== */
 	src = "";
-	dst = calloc(ft_strlen(src) + 1, 1);
-	ft_strcpy(dst, src);
 	
-	printf("String to copy: \"%s\"\n", src);
-	printf("Copied string: \"%s\"\n", dst);
-	printf("Errno: %d\n\n", errno);
-	free(dst);
-	
+	T_STRCPY
 	
 	/* =============================== Test 3 =============================== */
 	src = NULL;
-	dst = calloc(ft_strlen(src) + 1, 1);
-	ft_strcpy(dst, src);
 	
-	printf("String to copy: \"%s\"\n", src);
-	printf("Copied string: \"%s\"\n", dst);
-	printf("Errno: %d\n\n", errno);
-	free(dst);
+	T_STRCPY
 }
+
+
+/* ************************************************************************** */
+/*                                  ft_strcmp                                 */
+/* ************************************************************************** */
+
+
+#define T_STRCMP \
+	ret = ft_strcmp(s1, s2); \
+	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ret); \
+	printf("Errno: %d\n\n", errno); \
 
 void t_strcmp() {
 	char *s1;
 	char *s2;
+	int ret;
 
 	/* =============================== Test 1 =============================== */
 	s1 = "Hello World!";
 	s2 = "Hello World!";
 
-	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
-	printf("Errno: %d\n\n", errno);
+	T_STRCMP
 
-	
 	/* =============================== Test 2 =============================== */
 	s1 = "abc";
 	s2 = "aaa";
 
-	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
-	printf("Errno: %d\n\n", errno);
+	T_STRCMP
 
-	
 	/* =============================== Test 3 =============================== */
 	s1 = "abc";
 	s2 = "abcdef";
 
-	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
-	printf("Errno: %d\n\n", errno);
-	
-	
+	T_STRCMP
+
 	/* =============================== Test 4 =============================== */
 	s1 = "Hello World!";
 	s2 = NULL;
 
-	printf("s1: \"%s\" | s2: \"%s\"  ==>  %d\n", s1, s2, ft_strcmp(s2, s1));
-	printf("Errno: %d\n\n", errno);
+	T_STRCMP
 }
+
+
+/* ************************************************************************** */
+/*                                  ft_strdup                                 */
+/* ************************************************************************** */
+
+
+#define T_STRDUP \
+	dup = ft_strdup(str); \
+	printf("Original string: \"%s\"\n", str); \
+	printf("Duplicated string: \"%s\"\n", dup); \
+	printf("Errno: %d\n\n", errno); \
+	free(dup);
 
 void t_strdup() {
 	char *str;
@@ -123,41 +142,107 @@ void t_strdup() {
 
 	/* =============================== Test 1 =============================== */
 	str = "Hello World!";
-	dup = ft_strdup(str);
 
-	printf("Original string: \"%s\"\n", str);
-	printf("Duplicated string: \"%s\"\n", dup);
-	printf("Errno: %d\n\n", errno);
-	free(dup);
+	T_STRDUP
 
-	
 	/* =============================== Test 2 =============================== */
 	str = "";
-	dup = ft_strdup(str);
 
-	printf("Original string: \"%s\"\n", str);
-	printf("Duplicated string: \"%s\"\n", dup);
-	printf("Errno: %d\n\n", errno);
-	free(dup);
+	T_STRDUP
 
-	
 	/* =============================== Test 3 =============================== */
 	str = NULL;
-	dup = ft_strdup(str);
 
-	printf("Original string: \"%s\"\n", str);
-	printf("Duplicated string: \"%s\"\n", dup);
-	printf("Errno: %d\n\n", errno);
-	free(dup);
+	T_STRDUP
 }
+
+
+/* ************************************************************************** */
+/*                                  ft_write                                  */
+/* ************************************************************************** */
+
+
+#define T_WRITE \
+	ret = ft_write(fd, str, count); \
+	printf("\nString to write: \"%s\"\n", str); \
+	printf("Bytes to write: %lu  |  on fd: %d\n", count, fd); \
+	printf("Bytes written: %ld\n", ret); \
+	printf("Errno: %d\n\n", errno);
+
+void t_write() {
+	int		fd;
+	char	*str;
+	size_t	count;
+	ssize_t	ret;
+
+	/* =============================== Test 1 =============================== */
+	fd = 1;
+	str = "Hello World!";
+	count = ft_strlen(str);
+
+	T_WRITE
+
+	/* =============================== Test 2 =============================== */
+	fd = 2;
+	str = "Hello World!";
+	count = 3;
+
+	T_WRITE
+
+	/* =============================== Test 3 =============================== */
+	fd = 1;
+	str = "Hello World!";
+	count = 0;
+
+	T_WRITE
+
+	/* =============================== Test 4 =============================== */
+	fd = 1;
+	str = NULL;
+	count = 10;
+
+	T_WRITE
+
+	/* =============================== Test 5 =============================== */
+	fd = -42;
+	str = "Hello World!";
+	count = ft_strlen(str);
+
+	T_WRITE
+
+	/* =============================== Test 6 =============================== */
+	fd = 42;
+	str = "Hello World!";
+	count = ft_strlen(str);
+
+	T_WRITE
+}
+
+
+/* ************************************************************************** */
+/*                                   ft_read                                  */
+/* ************************************************************************** */
+
+
+// #define T_READ
+
+
+/* ************************************************************************** */
+/*                                    main                                    */
+/* ************************************************************************** */
+
+
+#define DELIM printf("================================\n\n");
 
 int main() {
 	t_strlen();
-	printf("================================\n\n");
+	DELIM
 	t_strcpy();
-	printf("================================\n\n");
+	DELIM
 	t_strcmp();
-	printf("================================\n\n");
+	DELIM
 	t_strdup();
+	DELIM
+	t_write();
 	return 0;
 }

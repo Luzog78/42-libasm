@@ -47,5 +47,5 @@ ft_strcmp:
 		ret
 
 	.err:
-		errno	EFAULT, 0
+		errno	EINVAL, 0
 		ret

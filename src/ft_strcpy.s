@@ -37,5 +37,5 @@ ft_strcpy:
 		ret							; return rax (original dst)
 
 	.err:
-		errno	EFAULT, 0
+		errno	EINVAL, 0
 		ret

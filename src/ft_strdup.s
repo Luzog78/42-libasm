@@ -1,7 +1,7 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_strcpy.s                                        :+:      :+:    :+:    ;
+;    ft_strdup.s                                        :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
@@ -12,30 +12,44 @@
 
 %include "defs.inc"
 
-global	ft_strcpy ; char	*ft_strcpy(char *dst, const char *src);
+extern	malloc
+extern	ft_strlen
+extern	ft_strcpy
+
+global	ft_strdup ; char	*ft_strdup(const char *s);
 
 section	.text
 
-ft_strcpy:
-	mov		rax, rdi			; rax = dst
-	cmp		rax, 0				; if (dst == 0)
-	je		.err				;   goto .err
-	cmp		rsi, 0				; if (src == 0)
-	je		.err				;   goto .err
+ft_strdup:
+	cmp		rdi, 0				; if (s == 0)
+	je		.null_pt			;   goto .null_pt
 
-	.loop:
-		mov		cl, byte [rsi]	; cl (8 bits register) = *(char *)src
-		mov		byte [rdi], cl	; *(char *)dst = cl
-		inc		rsi				; src++
-		inc		rdi				; dst++
-		cmp		byte [rsi], 0	; if (*(char *)src == 0)
-		je		.end			;   goto .end
-		jmp		.loop
+	push	rbp
+	mov		rbp, rsp
+	sub		rsp, 8				; reserve 8 bytes for qword var1
+
+	mov		qword [rbp-8], rdi	; var1 = s
+	call	ft_strlen			; rax = ft_strlen(s)
+	mov		rdi, rax			; rdi = rax
+	inc		rdi					; rdi++
+	call	MALLOC				; rax = malloc(rdi)
+	cmp		rax, 0				; if (rax == 0)
+	je		.no_mem				;   goto .no_mem
+	mov		rdi, rax			; rdi = rax
+	mov		rsi, qword [rbp-8]	; rsi = var1
+	call	ft_strcpy			; ft_strcpy(rdi, var1)
+	errno11	0
 
 	.end:
-		errno11	0
-		ret						; return rax (original dst)
+		add		rsp, 8
+		mov		rsp, rbp
+		pop		rbp
+		ret
+	
+	.no_mem:
+		errno	ENOMEM, 0
+		jmp		.end
 
-	.err:
+	.null_pt:
 		errno	EINVAL, 0
 		ret

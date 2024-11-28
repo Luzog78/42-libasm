@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/27 14:01:23 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/28 16:11:01 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME				= libasm.a
 SRC_FILES			= \
 						src/ft_strlen.s \
 						src/ft_strcpy.s \
-						src/ft_strcmp.s
+						src/ft_strcmp.s \
+						src/ft_strdup.s
 
 BUILD_FOLDER		= ./build
 
@@ -47,7 +48,7 @@ main : all
 	@echo ""
 	@echo ""
 	@echo -n "  > $(C_YELLOW)$(C_BOLD)./main$(C_RESET):  $(C_DIM)"
-	gcc -Wall -Wextra -Werror main.c -L. -lasm -I. -o main
+	gcc -g -Wall -Wextra -Werror main.c -L. -lasm -I. -o main
 	@echo "$(C_RESET)"
 	@echo ""
 	@echo -n "$(C_BOLD)$(C_MAGENTA)>$(C_BLUE)>$(C_CYAN)>$(C_GREEN)"

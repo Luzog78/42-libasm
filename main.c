@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/28 15:43:50 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/28 15:59:38 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,47 @@ void t_strcmp() {
 	printf("Errno: %d\n\n", errno);
 }
 
+void t_strdup() {
+	char *str;
+	char *dup;
+
+	/* =============================== Test 1 =============================== */
+	str = "Hello World!";
+	dup = ft_strdup(str);
+
+	printf("Original string: \"%s\"\n", str);
+	printf("Duplicated string: \"%s\"\n", dup);
+	printf("Errno: %d\n\n", errno);
+	free(dup);
+
+	
+	/* =============================== Test 2 =============================== */
+	str = "";
+	dup = ft_strdup(str);
+
+	printf("Original string: \"%s\"\n", str);
+	printf("Duplicated string: \"%s\"\n", dup);
+	printf("Errno: %d\n\n", errno);
+	free(dup);
+
+	
+	/* =============================== Test 3 =============================== */
+	str = NULL;
+	dup = ft_strdup(str);
+
+	printf("Original string: \"%s\"\n", str);
+	printf("Duplicated string: \"%s\"\n", dup);
+	printf("Errno: %d\n\n", errno);
+	free(dup);
+}
+
 int main() {
 	t_strlen();
 	printf("================================\n\n");
 	t_strcpy();
 	printf("================================\n\n");
 	t_strcmp();
+	printf("================================\n\n");
+	t_strdup();
 	return 0;
 }

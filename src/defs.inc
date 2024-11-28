@@ -26,9 +26,11 @@ section .note.GNU-stack noexec
 %define EXIT_SUCCESS	0
 %define EXIT_FAILURE	1
 
+%define MALLOC			malloc wrt ..plt
 %define ERRNO_LOC		__errno_location wrt ..plt
 %define EINVAL			22
 %define EFAULT			14
+%define ENOMEM			12
 
 %macro errno 2					; errno = %1, rax = %2
 	call	ERRNO_LOC			; rax = __errno_location()
@@ -44,3 +46,4 @@ section .note.GNU-stack noexec
 %endmacro
 
 extern __errno_location
+extern malloc

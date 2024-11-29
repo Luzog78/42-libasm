@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/28 23:24:55 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/29 12:17:36 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,15 @@ CC					= nasm
 CFLAGS				= -f elf64 -g -I ./src
 NAME				= libasm.a
 SRC_FILES			= \
-						src/ft_strlen.s \
-						src/ft_strcpy.s \
-						src/ft_strcmp.s \
-						src/ft_strdup.s \
-						src/ft_write.s \
-						src/ft_read.s
+						src/mandatory/ft_strlen.s \
+						src/mandatory/ft_strcpy.s \
+						src/mandatory/ft_strcmp.s \
+						src/mandatory/ft_strdup.s \
+						src/mandatory/ft_write.s \
+						src/mandatory/ft_read.s
+B_NAME				= libasm_bonus.a
+B_SRC_FILES			= \
+						src/bonus/ft_atoi_base_bonus.s
 
 BUILD_FOLDER		= ./build
 
@@ -39,6 +42,8 @@ C_WHITE				= \033[37m
 
 OBJ_FILES			= $(SRC_FILES:.s=.o)
 BUILD_FILES			= $(addprefix $(BUILD_FOLDER)/, $(OBJ_FILES))
+B_OBJ_FILES			= $(B_SRC_FILES:.s=.o)
+B_BUILD_FILES		= $(addprefix $(BUILD_FOLDER)/, $(B_OBJ_FILES))
 
 TO_COMPILE			= 0
 
@@ -51,6 +56,20 @@ main : all
 	@echo ""
 	@echo -n "  > $(C_YELLOW)$(C_BOLD)./main$(C_RESET):  $(C_DIM)"
 	gcc -g -Wall -Wextra -Werror main.c -L. -lasm -I. -o main
+	@echo "$(C_RESET)"
+	@echo ""
+	@echo -n "$(C_BOLD)$(C_MAGENTA)>$(C_BLUE)>$(C_CYAN)>$(C_GREEN)"
+	@echo -n " Compilation success ! "
+	@echo "$(C_CYAN)<$(C_BLUE)<$(C_MAGENTA)<$(C_RESET)"
+	@echo ""
+
+main_bonus : bonus
+	@echo -n "$(C_CYAN)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "Compiling $(C_YELLOW)./main_bonus$(C_CYAN)... :$(C_RESET)"
+	@echo ""
+	@echo ""
+	@echo -n "  > $(C_YELLOW)$(C_BOLD)./main_bonus$(C_RESET):  $(C_DIM)"
+	gcc -g -Wall -Wextra -Werror main_bonus.c -L. -lasm_bonus -I. -o main_bonus
 	@echo "$(C_RESET)"
 	@echo ""
 	@echo -n "$(C_BOLD)$(C_MAGENTA)>$(C_BLUE)>$(C_CYAN)>$(C_GREEN)"
@@ -72,10 +91,14 @@ $(NAME) : $(BUILD_FILES)
 m_line_break :
 	@echo ""
 
-b_flags :
+b_flags : $(B_BUILD_FILES)
 	@$(eval CFLAGS += -D BONUS=1)
+	@$(eval BUILD_FILES += $(B_BUILD_FILES))
+	@$(eval NAME = $(B_NAME))
 
 bonus : b_flags all
+
+$(B_NAME) : bonus
 
 $(BUILD_FOLDER)/%.o : %.s
 	@if [ $(TO_COMPILE) -eq 0 ] ; then \

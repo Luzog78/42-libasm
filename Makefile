@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/29 22:44:31 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/30 00:38:26 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ main : all
 	@echo ""
 	@echo ""
 	@echo -n "  > $(C_YELLOW)$(C_BOLD)./main$(C_RESET):  $(C_DIM)"
-	gcc -g -Wall -Wextra -Werror main.c -L. -lasm -I. -o main
+	gcc -g -Wall -Wextra -Werror ./test/main.c -L. -lasm -I. -o main
 	@echo "$(C_RESET)"
 	@echo ""
 	@echo -n "$(C_BOLD)$(C_MAGENTA)>$(C_BLUE)>$(C_CYAN)>$(C_GREEN)"
@@ -73,7 +73,7 @@ main_bonus : bonus
 	@echo ""
 	@echo ""
 	@echo -n "  > $(C_YELLOW)$(C_BOLD)./main_bonus$(C_RESET):  $(C_DIM)"
-	gcc -g -Wall -Wextra -Werror main_bonus.c -L. -lasm_bonus -I. -o main_bonus
+	gcc -g -Wall -Wextra -Werror ./test/main_bonus.c -L. -lasm_bonus -I. -o main_bonus
 	@echo "$(C_RESET)"
 	@echo ""
 	@echo -n "$(C_BOLD)$(C_MAGENTA)>$(C_BLUE)>$(C_CYAN)>$(C_GREEN)"

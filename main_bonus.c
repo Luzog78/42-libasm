@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/29 16:57:36 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/29 21:29:21 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,100 @@ void t_list_size() {
 
 
 /* ************************************************************************** */
+/*                                ft_list_sort                                */
+/* ************************************************************************** */
+
+
+int	cmp1(void *a, void *b) {
+	return ft_strcmp((char *) a, (char *) b);
+}
+
+int	cmp2(void *a, void *b) {
+	return -ft_strcmp((char *) a, (char *) b);
+}
+
+int	cmp3(void *a, void *b) {
+	return a > b;
+}
+
+#define T_LIST_SORT \
+	printf("List: [%p] ", addr); \
+	t_list_print(list); \
+	ft_list_sort(addr, func); \
+	printf("Sorted (by %p): ", func); \
+	t_list_print(list); \
+	t_list_free(list); \
+	printf("Errno: %d\n\n", errno); \
+	errno = 0;
+
+#define LIST_INIT \
+	ft_list_push_front(addr, "a"); \
+	ft_list_push_front(addr, "c"); \
+	ft_list_push_front(addr, "f"); \
+	ft_list_push_front(addr, "d"); \
+	ft_list_push_front(addr, "b"); \
+	ft_list_push_front(addr, "e");
+
+void t_list_sort() {
+	t_list	*list;
+	t_list	**addr;
+	int		(*func)(void *, void *);
+
+	/* =============================== Test 1 =============================== */
+	list = NULL;
+	addr = &list;
+	func = cmp1;
+	LIST_INIT
+
+	T_LIST_SORT
+
+	/* =============================== Test 2 =============================== */
+	list = NULL;
+	addr = &list;
+	func = cmp2;
+	LIST_INIT
+
+	T_LIST_SORT
+
+	/* =============================== Test 3 =============================== */
+	list = NULL;
+	addr = &list;
+	func = cmp3;
+	LIST_INIT
+
+	T_LIST_SORT
+
+	/* =============================== Test 4 =============================== */
+	list = NULL;
+	addr = &list;
+	func = cmp1;
+
+	T_LIST_SORT
+
+	/* =============================== Test 5 =============================== */
+	list = NULL;
+	addr = NULL;
+	func = cmp1;
+
+	T_LIST_SORT
+
+	/* =============================== Test 6 =============================== */
+	list = t_list_new("a");
+	addr = &list;
+	func = cmp1;
+
+	T_LIST_SORT
+
+	/* =============================== Test 7 =============================== */
+	list = t_list_new("a");
+	addr = &list;
+	func = NULL;
+
+	T_LIST_SORT
+}
+
+
+/* ************************************************************************** */
 /*                                    main                                    */
 /* ************************************************************************** */
 
@@ -242,5 +336,7 @@ int main() {
 	t_list_push_front();
 	DELIM
 	t_list_size();
+	DELIM
+	t_list_sort();
 	return 0;
 }

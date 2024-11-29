@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/29 12:17:36 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/29 16:19:48 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC_FILES			= \
 						src/mandatory/ft_read.s
 B_NAME				= libasm_bonus.a
 B_SRC_FILES			= \
-						src/bonus/ft_atoi_base_bonus.s
+						src/bonus/ft_atoi_base_bonus.s \
+						src/bonus/ft_list_push_front_bonus.s
 
 BUILD_FOLDER		= ./build
 

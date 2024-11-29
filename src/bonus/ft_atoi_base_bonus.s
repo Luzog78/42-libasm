@@ -1,7 +1,7 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_atoi_base_bonus.s                               :+:      :+:    :+:    ;
+;    ft_atoi_base.s                                     :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
@@ -12,11 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_atoi_base_bonus ; int	ft_atoi_base_bonus(const void *str, const void *base);
+global	ft_atoi_base ; int	ft_atoi_base(const void *str, const void *base);
 
 section	.text
 
-ft_atoi_base_bonus:
+ft_atoi_base:
 	push	rbp
 	mov		rbp, rsp
 	sub		rsp, 48				; str_save(8), base_save(8), sum(8), base_len(8), neg_mult(8), 8 for alignment

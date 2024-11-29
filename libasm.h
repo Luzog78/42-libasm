@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:26:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/29 15:47:14 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/29 16:06:57 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ extern ssize_t	ft_write(int fd, const void *buf, size_t count);
 #  define BONUS 0
 # else
 
-extern int		ft_atoi_base_bonus(const void *str, const void *base);
+typedef struct		s_list {
+	void			*data;
+	struct s_list	*next;
+}	t_list;
+
+extern int		ft_atoi_base(const void *str, const void *base);
+extern void		ft_list_push_front(t_list **lst, void *data);
 
 # endif
 

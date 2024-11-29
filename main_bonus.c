@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/29 16:32:16 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/29 16:57:36 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	t_list_print(t_list *list) {
 	printf("Interpret: \"%s\" [%s]\n", str, base); \
 	ret = ft_atoi_base(str, base); \
 	printf("Number found: %d\n", ret); \
-	printf("Errno: %d\n\n", errno);
+	printf("Errno: %d\n\n", errno); \
+	errno = 0;
 
 void t_atoi_base() {
 	char	*str;
@@ -142,7 +143,8 @@ void t_atoi_base() {
 	printf("List after: "); \
 	t_list_print(list); \
 	t_list_free(list); \
-	printf("Errno: %d\n\n", errno);
+	printf("Errno: %d\n\n", errno); \
+	errno = 0;
 
 void t_list_push_front() {
 	t_list	*list;
@@ -188,6 +190,46 @@ void t_list_push_front() {
 
 
 /* ************************************************************************** */
+/*                                ft_list_size                                */
+/* ************************************************************************** */
+
+
+#define T_LIST_SIZE \
+	printf("List: "); \
+	t_list_print(list); \
+	ret = ft_list_size(list); \
+	printf("Size: %lu\n", ret); \
+	t_list_free(list); \
+	printf("Errno: %d\n\n", errno); \
+	errno = 0;
+
+void t_list_size() {
+	t_list	*list;
+	size_t	ret;
+
+	/* =============================== Test 1 =============================== */
+	list = t_list_new("Hello");
+
+	T_LIST_SIZE
+
+	/* =============================== Test 2 =============================== */
+	list = NULL;
+
+	T_LIST_SIZE
+
+	/* =============================== Test 3 =============================== */
+	list = t_list_new("A");
+	list->next = t_list_new("B");
+	list->next->next = t_list_new("C");
+	list->next->next->next = t_list_new("D");
+	list->next->next->next->next = t_list_new("E");
+	list->next->next->next->next->next = t_list_new("F");
+
+	T_LIST_SIZE
+}
+
+
+/* ************************************************************************** */
 /*                                    main                                    */
 /* ************************************************************************** */
 
@@ -198,5 +240,7 @@ int main() {
 	t_atoi_base();
 	DELIM
 	t_list_push_front();
+	DELIM
+	t_list_size();
 	return 0;
 }

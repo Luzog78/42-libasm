@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:26:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/29 16:06:57 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/29 16:34:42 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct		s_list {
 
 extern int		ft_atoi_base(const void *str, const void *base);
 extern void		ft_list_push_front(t_list **lst, void *data);
+extern size_t	ft_list_size(t_list *lst);
 
 # endif
 

@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/11/29 16:59:45 by ysabik           ###   ########.fr        #
+#    Updated: 2024/11/29 22:44:31 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ B_SRC_FILES			= \
 						src/bonus/ft_atoi_base_bonus.s \
 						src/bonus/ft_list_push_front_bonus.s \
 						src/bonus/ft_list_size_bonus.s \
-						src/bonus/ft_list_sort_bonus.s
+						src/bonus/ft_list_sort_bonus.s \
+						src/bonus/ft_list_remove_if_bonus.s
 
 BUILD_FOLDER		= ./build
 

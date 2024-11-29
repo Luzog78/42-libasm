@@ -27,6 +27,7 @@ section .note.GNU-stack noexec
 %define EXIT_FAILURE	1
 
 %define MALLOC			malloc wrt ..plt
+%define FREE			free wrt ..plt
 %define ERRNO_LOC		__errno_location wrt ..plt
 %define EINVAL			22
 %define EFAULT			14
@@ -46,5 +47,6 @@ section .note.GNU-stack noexec
 	mov		rax, r11			; rax = r11 --> get back the return value
 %endmacro
 
-extern __errno_location
 extern malloc
+extern free
+extern __errno_location

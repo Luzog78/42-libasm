@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:26:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/29 18:10:09 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:21:24 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,28 @@ typedef struct		s_list {
 extern int		ft_atoi_base(const void *str, const void *base);
 extern void		ft_list_push_front(t_list **lst, void *data);
 extern size_t	ft_list_size(t_list *lst);
-extern void		ft_list_sort(t_list **lst, int (*cmp)(void *, void *));
+/**
+ * @brief Sorts the list using the cmp function.
+ *
+ * @param lst 	The address of list's head.
+ * @param cmp 	The comparison function.
+ * 					|| Parameters: (void *a, void *b)
+ * 					|| [< 0]: a then b, [== 0]: a equals b, [> 0]: b then a
+ */
+extern void		ft_list_sort(t_list **lst, int (*cmp)());
+/**
+ * @brief Removes all elements from the list that are equal to ref_data.
+ *
+ * @param lst 		The address of list's head.
+ * @param ref_data	The reference data.
+ * @param cmp 		The comparison function.
+ * 						|| Parameters: (void *a, void *b)
+ * 						|| [< 0]: a then b, [== 0]: a equals b, [> 0]: b then a
+ * @param free_fct	The function to free the data: free_fct(lst->data).
+ * 						|| Parameters: (void *data)
+ */
+extern void		ft_list_remove_if(t_list **lst, void *ref_data,
+									int (*cmp)(), void (*free_fct)(void *));
 
 # endif
 

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:25:52 by ysabik            #+#    #+#             */
-/*   Updated: 2024/11/29 21:29:21 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/11/30 00:21:24 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,28 @@ void	t_list_free(t_list *list) {
 	}
 }
 
-void	t_list_print(t_list *list) {
+void	t_list_print(t_list *list, int str) {
 	printf("| ");
 	while (list) {
-		printf("%s -> ", (char *)list->data);
+		if (str)
+			printf("\"%s\" %p -> ", (char *) list->data, list->data);
+		else
+			printf("%lld -> ", (long long) list->data);
 		list = list->next;
 	}
 	printf("NULL\n");
+}
+
+int	cmp1(void *a, void *b) {
+	return ft_strcmp((char *) a, (char *) b);
+}
+
+int	cmp2(void *a, void *b) {
+	return -ft_strcmp((char *) a, (char *) b);
+}
+
+int	cmp3(void *a, void *b) {
+	return a > b;
 }
 
 
@@ -137,11 +152,11 @@ void t_atoi_base() {
 
 #define T_LIST_PUSH_FRONT \
 	printf("List before: "); \
-	t_list_print(list); \
+	t_list_print(list, 1); \
 	printf("Data to push: \"%s\" to %p\n", data, addr); \
 	ft_list_push_front(addr, data); \
 	printf("List after: "); \
-	t_list_print(list); \
+	t_list_print(list, 1); \
 	t_list_free(list); \
 	printf("Errno: %d\n\n", errno); \
 	errno = 0;
@@ -196,7 +211,7 @@ void t_list_push_front() {
 
 #define T_LIST_SIZE \
 	printf("List: "); \
-	t_list_print(list); \
+	t_list_print(list, 1); \
 	ret = ft_list_size(list); \
 	printf("Size: %lu\n", ret); \
 	t_list_free(list); \
@@ -234,24 +249,12 @@ void t_list_size() {
 /* ************************************************************************** */
 
 
-int	cmp1(void *a, void *b) {
-	return ft_strcmp((char *) a, (char *) b);
-}
-
-int	cmp2(void *a, void *b) {
-	return -ft_strcmp((char *) a, (char *) b);
-}
-
-int	cmp3(void *a, void *b) {
-	return a > b;
-}
-
 #define T_LIST_SORT \
 	printf("List: [%p] ", addr); \
-	t_list_print(list); \
+	t_list_print(list, 1); \
 	ft_list_sort(addr, func); \
 	printf("Sorted (by %p): ", func); \
-	t_list_print(list); \
+	t_list_print(list, 1); \
 	t_list_free(list); \
 	printf("Errno: %d\n\n", errno); \
 	errno = 0;
@@ -324,6 +327,133 @@ void t_list_sort() {
 
 
 /* ************************************************************************** */
+/*                             ft_list_remove_if                              */
+/* ************************************************************************** */
+
+
+#define T_LIST_REMOVE_IF \
+	printf("List: [%p] ", addr); \
+	t_list_print(list, str_format); \
+	if (str_format) \
+		printf("Data reference: \"%s\" [%p] (comp:%p free:%p)\n", \
+			(char *) data, data, func, ffunc); \
+	else \
+		printf("Data reference: %lld (comp:%p free:%p)\n", \
+			(long long) data, func, ffunc); \
+	ft_list_remove_if(addr, data, func, ffunc); \
+	printf("List after: "); \
+	t_list_print(list, str_format); \
+	t_list_free(list); \
+	printf("Errno: %d\n\n", errno); \
+	errno = 0;
+
+void t_list_remove_if() {
+	t_list	*list;
+	t_list	**addr;
+	void	*data;
+	int		(*func)(void *, void *);
+	void	(*ffunc)(void *);
+	int		str_format;
+
+	/* =============================== Test 1 =============================== */
+	list = NULL;
+	addr = &list;
+	data = "a";
+	func = cmp1;
+	ffunc = free;
+	str_format = 1;
+	ft_list_push_front(addr, "c");
+	ft_list_push_front(addr, "b");
+	ft_list_push_front(addr, ft_strdup("a"));
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 2 =============================== */
+	list = NULL;
+	addr = &list;
+	data = "b";
+	func = cmp1;
+	ffunc = free;
+	str_format = 1;
+	ft_list_push_front(addr, "c");
+	ft_list_push_front(addr, "c");
+	ft_list_push_front(addr, "c");
+	ft_list_push_front(addr, ft_strdup("b"));
+	ft_list_push_front(addr, ft_strdup("b"));
+	ft_list_push_front(addr, ft_strdup("b"));
+	ft_list_push_front(addr, "a");
+	ft_list_push_front(addr, "a");
+	ft_list_push_front(addr, "a");
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 3 =============================== */
+	list = NULL;
+	addr = &list;
+	data = (void *) 2000;
+	func = cmp3;
+	ffunc = NULL;
+	str_format = 0;
+	ft_list_push_front(addr, (void *) 0);
+	ft_list_push_front(addr, (void *) 123);
+	ft_list_push_front(addr, (void *) 4096);
+	ft_list_push_front(addr, (void *) 99999999);
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 4 =============================== */
+	list = t_list_new("Hello World!");
+	addr = &list;
+	data = "Some value...";
+	func = cmp1;
+	ffunc = NULL;
+	str_format = 1;
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 5 =============================== */
+	list = t_list_new("Heyy");
+	addr = &list;
+	data = "Heyy";
+	func = cmp1;
+	ffunc = NULL;
+	str_format = 1;
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 6 =============================== */
+	list = t_list_new("Heyy");
+	addr = NULL;
+	data = "Heyy";
+	func = cmp1;
+	ffunc = NULL;
+	str_format = 1;
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 7 =============================== */
+	list = t_list_new("Heyy");
+	addr = &list;
+	data = "Heyy";
+	func = NULL;
+	ffunc = NULL;
+	str_format = 1;
+
+	T_LIST_REMOVE_IF
+
+	/* =============================== Test 8 =============================== */
+	list = NULL;
+	addr = &list;
+	data = "Heyy";
+	func = cmp1;
+	ffunc = NULL;
+	str_format = 1;
+
+	T_LIST_REMOVE_IF
+}
+
+
+/* ************************************************************************** */
 /*                                    main                                    */
 /* ************************************************************************** */
 
@@ -338,5 +468,7 @@ int main() {
 	t_list_size();
 	DELIM
 	t_list_sort();
+	DELIM
+	t_list_remove_if();
 	return 0;
 }

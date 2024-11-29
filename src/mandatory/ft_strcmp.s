@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_strcmp ; int	ft_strcmp(const char *s1, const char *s2);
+global	ft_strcmp
 
 section	.text
 
+; int	ft_strcmp(const char *s1, const char *s2);
 ft_strcmp:
 	cmp		rdi, 0				; if (s1 == 0)
 	je		.err				;   goto .err

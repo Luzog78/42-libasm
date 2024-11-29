@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_strlen ; size_t	ft_strlen(const char *s);
+global	ft_strlen
 
 section	.text
 
+; size_t	ft_strlen(const char *s);
 ft_strlen:
 	mov		rax, rdi			; rax = s
 	cmp		rax, 0				; if (s == 0)

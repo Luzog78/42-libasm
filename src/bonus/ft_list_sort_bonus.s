@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_list_sort ; void	ft_list_sort(t_list **lst, int (*cmp)(void *, void *));
+global	ft_list_sort
 
 section	.text
 
+; void	ft_list_sort(t_list **lst, int (*cmp)(void *, void *));
 ft_list_sort:
 	cmp		rdi, 0
 	je		.err

@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_list_push_front ; void	ft_list_push_front(t_list **lst, void *data)
+global	ft_list_push_front
 
 section	.text
 
+; void	ft_list_push_front(t_list **lst, void *data);
 ft_list_push_front:
 	cmp		rdi, 0
 	je		.null_pt

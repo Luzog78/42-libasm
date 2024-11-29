@@ -12,14 +12,16 @@
 
 %include "defs.inc"
 
-global	ft_atoi_base ; int	ft_atoi_base(const void *str, const void *base);
+global	ft_atoi_base
 
 section	.text
 
+; int	ft_atoi_base(const void *str, const void *base);
 ft_atoi_base:
 	push	rbp
 	mov		rbp, rsp
-	sub		rsp, 48				; str_save(8), base_save(8), sum(8), base_len(8), neg_mult(8), 8 for alignment
+	sub		rsp, 48				; str_save(8), base_save(8), sum(8),
+								; 	base_len(8), neg_mult(8), 8 for alignment
 
 	cmp		rdi, 0
 	je		.err

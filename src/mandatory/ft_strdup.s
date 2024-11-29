@@ -16,10 +16,11 @@ extern	malloc
 extern	ft_strlen
 extern	ft_strcpy
 
-global	ft_strdup ; char	*ft_strdup(const char *s);
+global	ft_strdup
 
 section	.text
 
+; char	*ft_strdup(const char *s);
 ft_strdup:
 	cmp		rdi, 0				; if (s == 0)
 	je		.null_pt			;   goto .null_pt

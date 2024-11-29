@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_strcpy ; char	*ft_strcpy(char *dst, const char *src);
+global	ft_strcpy
 
 section	.text
 
+; char	*ft_strcpy(char *dst, const char *src);
 ft_strcpy:
 	mov		rax, rdi			; rax = dst
 	cmp		rax, 0				; if (dst == 0)

@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_read ; ssize_t	ft_read(int fd, const void *buf, size_t count);
+global	ft_read
 
 section	.text
 
+; ssize_t	ft_read(int fd, const void *buf, size_t count);
 ft_read:
 	mov		rax, SYS_READ
 	syscall					; rax = read(...)

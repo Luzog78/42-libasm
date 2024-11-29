@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_write ; ssize_t	ft_write(int fd, const void *buf, size_t count);
+global	ft_write
 
 section	.text
 
+; ssize_t	ft_write(int fd, const void *buf, size_t count);
 ft_write:
 	mov		rax, SYS_WRITE
 	syscall					; rax = write(...)

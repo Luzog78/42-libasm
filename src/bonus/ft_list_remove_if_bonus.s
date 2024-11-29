@@ -12,10 +12,12 @@
 
 %include "defs.inc"
 
-global	ft_list_remove_if ; void	ft_list_remove_if(t_list **lst, void *ref_data, int (*cmp)(void *, void *), void (*free_fct)(void *))
+global	ft_list_remove_if
 
 section	.text
 
+; void	ft_list_remove_if(t_list **lst, void *ref_data,
+; 			int (*cmp)(void *, void *), void (*free_fct)(void *));
 ft_list_remove_if:
 	cmp		rdi, 0
 	je		.err
@@ -24,7 +26,8 @@ ft_list_remove_if:
 
 	push	rbp
 	mov		rbp, rsp
-	sub		rsp, 48				; tmpA(8), cmp(8), tmpB(8), ref_data(8), free_fct(8), prev(8)
+	sub		rsp, 48				; tmpA(8), cmp(8), tmpB(8),
+								; 	ref_data(8), free_fct(8), prev(8)
 
 	mov		[rbp-8], rdi		; list = lst
 	mov		[rbp-16], rdx		; cmp = cmp

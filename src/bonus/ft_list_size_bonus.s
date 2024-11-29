@@ -12,10 +12,11 @@
 
 %include "defs.inc"
 
-global	ft_list_size ; size_t	ft_list_size(t_list *lst)
+global	ft_list_size
 
 section	.text
 
+; size_t	ft_list_size(t_list *lst);
 ft_list_size:
 	xor		rax, rax
 
